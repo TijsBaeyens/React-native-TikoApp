@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import QRPage from './Screens/QRPage.jsx';
+import NOKPage from './Screens/NokPage.jsx';
+import StartPage from './Screens/StartPage.jsx';
+import OkPage from './Screens/OkPage.jsx';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="StartPage" >
+        <Stack.Screen name='StartPage' component={StartPage} options={{ title: null, headerShown: false }}/>
+        <Stack.Screen name="QRPage" component={QRPage} options={{ title: null, headerShown: false }}/>
+        <Stack.Screen name="NOKPage" component={NOKPage} options={{ title: null, headerShown: false }}/>
+        <Stack.Screen name='OKPage' component={OkPage} options={{ title: null, headerShown: false }}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
