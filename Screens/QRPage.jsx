@@ -41,7 +41,11 @@ export default function QRPage({ navigation }) {
         }
       })
       .catch((error) => {
+        if(error instanceof SyntaxError) {
+          navigateToErrorPage();
+        } else {
         console.error('Error calling the API:', error);
+        }
       });
   };
   
@@ -58,6 +62,14 @@ export default function QRPage({ navigation }) {
       routes: [{ name: 'OKPage', params: { seat: apiData.seat } }],
     });
   };
+
+  const navigateToErrorPage = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'ErrorPage' }],
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Camera
